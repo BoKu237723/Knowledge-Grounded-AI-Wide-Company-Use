@@ -1,6 +1,7 @@
 # requirements.txt
 # ollama
 # google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+# Fucking take 30m to polish with commands bruh "linux is hugging my hand :D"
 
 import ollama
 from google.oauth2.credentials import Credentials
@@ -116,7 +117,7 @@ class DepartmentAI:
                     week_number = match.group(1)
                     weekly_reports[f'week{week_number}'] = doc['id']
                 else:
-                    # Also include documents that don't follow Week-XX pattern but are in the folder
+                    # Also include documents that don't follow Week-XX pattern but are in the foldr
                     weekly_reports[doc_name.lower().replace(' ', '_')] = doc['id']
             
             return weekly_reports
@@ -125,7 +126,7 @@ class DepartmentAI:
             print(f"Error discovering weekly reports: {error}")
             return {}
     
-    def get_document_content(self, document_id):
+    def get_document_content(self, document_id): # not quite satisfied tbh
         """Extract text content from a Google Doc"""
         try:
             document = self.service.documents().get(documentId=document_id).execute()
@@ -195,7 +196,7 @@ class DepartmentAI:
         except Exception as e:
             return f"Error loading AI prompt: {e}"
     
-    def query_ollama(self, department, question):
+    def query_ollama(self, department, question): # maybe i should add assistant next update
         """Query Ollama with the department-specific context"""
         system_prompt = self.load_ai_prompt(department)
         if not system_prompt or system_prompt.startswith("Error"):
